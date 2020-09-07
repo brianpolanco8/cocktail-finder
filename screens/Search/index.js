@@ -69,7 +69,7 @@ const Search = ({navigation}) => {
 
           {/* Loader */}
           {search?.isLoading && (
-            <ActivityIndicator size="large" color="#00ff00" />
+            <ActivityIndicator size="large" color={COLORS.WHITE} />
           )}
 
           {/* Cards */}
