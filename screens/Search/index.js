@@ -24,34 +24,6 @@ import SearchHeader from '../../components/SearchHeader';
 
 const {width} = Dimensions.get('window');
 
-const drinks = [
-  {
-    strDrink: 'Long vodka',
-    strDrinkThumb:
-      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
-  },
-  {
-    strDrink: 'Long vodka',
-    strDrinkThumb:
-      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
-  },
-  {
-    strDrink: 'Long vodka',
-    strDrinkThumb:
-      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
-  },
-  {
-    strDrink: 'Long vodka',
-    strDrinkThumb:
-      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
-  },
-  {
-    strDrink: 'Long vodka',
-    strDrinkThumb:
-      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
-  },
-];
-
 const Search = ({navigation}) => {
   const search = useSelector((state) => state.search);
   const dispatch = useDispatch();
@@ -129,7 +101,6 @@ const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
     alignItems: 'center',
-    // justifyContent: 'center',
     borderRadius: 5,
     width: width,
   },
