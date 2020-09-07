@@ -42,16 +42,16 @@ const enchancers = compose(thunk);
 
 // Compose enhancers
 
-const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose(thunk);
+// const composeEnhancers =
+//   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose(thunk);
 
 // Create and export the store
 
-// const store = createStore(persistedReducer, enchancers);
-const store = createStore(
-  persistedReducer,
-  composeEnhancers(applyMiddleware(thunkMiddleware)),
-);
+const store = createStore(persistedReducer, enchancers);
+// const store = createStore(
+//   persistedReducer,
+//   composeEnhancers(applyMiddleware(thunkMiddleware)),
+// );
 
 // Middleware: Redux Persist Persister
 
