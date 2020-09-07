@@ -23,6 +23,26 @@ const drinks = [
     strDrinkThumb:
       'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
   },
+  {
+    strDrink: 'Long vodka',
+    strDrinkThumb:
+      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
+  },
+  {
+    strDrink: 'Long vodka',
+    strDrinkThumb:
+      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
+  },
+  {
+    strDrink: 'Long vodka',
+    strDrinkThumb:
+      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
+  },
+  {
+    strDrink: 'Long vodka',
+    strDrinkThumb:
+      'https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg',
+  },
 ];
 
 const Search = ({navigation}) => {
@@ -52,7 +72,7 @@ const Search = ({navigation}) => {
 
           {/* Cards */}
 
-          <ScrollView style={styles.cardContainer}>
+          <ScrollView contentContainerStyle={styles.cardContainer}>
             {drinks.map((drink, i) => (
               <View key={i} style={styles.card}>
                 <Image
@@ -108,16 +128,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   cardContainer: {
-    // alignItems: 'center',
+    alignItems: 'center',
   },
   card: {
-    alignSelf: 'center',
+    // alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.WHITE,
     padding: 30,
     borderRadius: 40,
     width: width * 0.9,
+    marginBottom: 20,
   },
   cardImage: {
     height: 100,
