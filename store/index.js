@@ -21,7 +21,7 @@ const persistConfig = {
 
   // Whitelist (Save Specific Reducers)
 
-  whitelist: ['session'],
+  // whitelist: [''],
 
   // Blacklist (Don't Save Specific Reducers)
 
