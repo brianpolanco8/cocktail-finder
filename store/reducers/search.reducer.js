@@ -1,7 +1,6 @@
 import * as ActionTypes from '../actions/types';
 
 const initialState = {
-  searchKeyword: '',
   data: [],
   error: null,
   isLoading: false,
@@ -15,18 +14,31 @@ const session = (state = initialState, action) => {
         isLoading: true,
       };
 
-    case ActionTypes.USER_SIGN_IN_SUCCESS:
+    case ActionTypes.SEARCH_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload.drinks,
         isLoading: false,
       };
 
-    case ActionTypes.USER_SIGN_IN_FAILURE:
+    case ActionTypes.SEARCH_FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+
+    case ActionTypes.CLEAR_SEARCH_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case ActionTypes.CLEAR_SEARCH_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        data: [],
       };
 
     default:

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,20 @@ import {
   TextInput,
   StatusBar,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
+import {useSelector, useDispatch} from 'react-redux';
 import {COLORS} from '../../styles';
+import * as SearchActions from '../../store/actions/search.action';
+import Loader from '../../components/Loader';
+import axios from 'axios';
+import Card from '../../components/Card';
+import SearchHeader from '../../components/SearchHeader';
 
 const {width} = Dimensions.get('window');
 
@@ -46,6 +53,32 @@ const drinks = [
 ];
 
 const Search = ({navigation}) => {
+  const search = useSelector((state) => state.search);
+  const dispatch = useDispatch();
+  const [searchKeyword, setSearchKeyword] = useState('');
+
+  const handleSearch = (keyword) => {
+    if (keyword.length > 2) {
+      dispatch(SearchActions.searchDrink(keyword));
+    } else if (keyword.length < 3) {
+      dispatch(SearchActions.searchDrink(''));
+    }
+  };
+
+  const clearSearch = () => {
+    console.log('working');
+    setSearchKeyword('');
+    dispatch(SearchActions.clearSearch());
+  };
+
+  useEffect(() => {
+    const {cancel, token} = axios.CancelToken.source();
+    if (searchKeyword.length > 2) {
+      const timeOutId = setTimeout(() => handleSearch(searchKeyword), 500);
+      return () => cancel('No more queries') || clearTimeout(timeOutId);
+    }
+  }, [searchKeyword]);
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -55,32 +88,26 @@ const Search = ({navigation}) => {
         end={{x: 0, y: 2}}>
         <SafeAreaView>
           {/* Header */}
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon
-                style={styles.icon}
-                name="angle-left"
-                size={30}
-                color={COLORS.WHITE}
-              />
-            </TouchableOpacity>
-            <TextInput autoFocus style={styles.input} />
-            <TouchableOpacity>
-              <Text style={styles.cancelText}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
+          <SearchHeader
+            clearSearch={clearSearch}
+            navigation={navigation}
+            setSearchKeyword={setSearchKeyword}
+            searchKeyword={searchKeyword}
+          />
+
+          {/* Loader */}
+          {search?.isLoading && (
+            <ActivityIndicator size="large" color="#00ff00" />
+          )}
 
           {/* Cards */}
-
           <ScrollView contentContainerStyle={styles.cardContainer}>
-            {drinks.map((drink, i) => (
-              <View key={i} style={styles.card}>
-                <Image
-                  style={styles.cardImage}
-                  source={{uri: drink.strDrinkThumb}}
-                />
-                <Text style={styles.cardText}>{drink.strDrink}</Text>
-              </View>
+            {search?.data?.map((drink, i) => (
+              <Card
+                key={i}
+                imageUrl={drink.strDrinkThumb}
+                label={drink.strDrink}
+              />
             ))}
           </ScrollView>
         </SafeAreaView>
@@ -106,49 +133,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: width,
   },
-  header: {
-    // flex: 1,
-    padding: 10,
-    // backgroundColor: 'white',
-    height: 100,
-    width,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  input: {
-    backgroundColor: COLORS.WHITE,
-    padding: 10,
-    width: width * 0.7,
-    borderRadius: 20,
-  },
-  cancelText: {
-    fontSize: 20,
-    color: COLORS.WHITE,
-    fontWeight: '700',
-  },
+
   cardContainer: {
     alignItems: 'center',
-  },
-  card: {
-    // alignSelf: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: COLORS.WHITE,
-    padding: 30,
-    borderRadius: 40,
-    width: width * 0.9,
-    marginBottom: 20,
-  },
-  cardImage: {
-    height: 100,
-    width: 100,
-    resizeMode: 'contain',
-    borderRadius: 100,
-    marginRight: 30,
-  },
-  cardText: {
-    fontSize: 30,
-    fontWeight: '500',
   },
 });

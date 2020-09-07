@@ -1,10 +1,10 @@
+import axios from 'axios';
+
 class SearchService {
   static getDrink(search) {
-    return fetch(
+    return axios.get(
       `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`,
-    )
-      .then((res) => res.json())
-      .then((data) => data);
+    );
   }
 }
 
