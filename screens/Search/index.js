@@ -12,12 +12,10 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
 import {COLORS} from '../../styles';
 import * as SearchActions from '../../store/actions/search.action';
-import Loader from '../../components/Loader';
 import axios from 'axios';
 import Card from '../../components/Card';
 import SearchHeader from '../../components/SearchHeader';
@@ -38,7 +36,6 @@ const Search = ({navigation}) => {
   };
 
   const clearSearch = () => {
-    console.log('working');
     setSearchKeyword('');
     dispatch(SearchActions.clearSearch());
   };
