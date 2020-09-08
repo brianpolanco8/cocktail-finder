@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -6,10 +6,15 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {COLORS} from '../../styles';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 const {width} = Dimensions.get('window');
 
 const Home = ({navigation}) => {
+  const [placeholder, setPlaceholder] = useState(
+    'Search your favorite cocktail',
+  );
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -32,10 +37,10 @@ const Home = ({navigation}) => {
         </View>
 
         {/* BUTTON */}
-        <Input
-          placeholderTextColor={'black'}
-          onFocus={() => navigation.navigate('Search')}
-          placeholder="Search your favorite cocktail"
+
+        <Button
+          label={placeholder}
+          onPress={() => navigation.navigate('Search')}
         />
       </LinearGradient>
     </View>

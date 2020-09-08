@@ -16,8 +16,7 @@ import * as SearchActions from '../../store/actions/search.action';
 import axios from 'axios';
 import Card from '../../components/Card';
 import SearchHeader from '../../components/SearchHeader';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
+import Alert from '../../components/Alert';
 const {width, height} = Dimensions.get('window');
 
 const Search = ({navigation}) => {
@@ -25,8 +24,6 @@ const Search = ({navigation}) => {
   const dispatch = useDispatch();
   const [searchKeyword, setSearchKeyword] = useState('');
   const [searched, setSearched] = useState(false);
-
-  console.log('length', search?.data?.length);
 
   const handleSearch = (keyword) => {
     setSearched(true);
@@ -46,7 +43,10 @@ const Search = ({navigation}) => {
   useEffect(() => {
     const {cancel} = axios.CancelToken.source();
     if (searchKeyword.trim().length > 2) {
-      const timeOutId = setTimeout(() => handleSearch(searchKeyword), 500);
+      const timeOutId = setTimeout(
+        () => handleSearch(searchKeyword.trim()),
+        500,
+      );
       return () => cancel('No more queries') || clearTimeout(timeOutId);
     }
   }, [searchKeyword]);
@@ -72,14 +72,7 @@ const Search = ({navigation}) => {
             <ActivityIndicator size="large" color={COLORS.WHITE} />
           )}
 
-          {searched && search?.data?.length === undefined && (
-            <View style={styles.bannerContainer}>
-              <Icon name="exclamation" color="white" size={40} />
-              <View style={styles.banner}>
-                <Text style={styles.bannerText}>No results found</Text>
-              </View>
-            </View>
-          )}
+          {searched && search?.data?.length === undefined && <Alert />}
 
           {/* Cards */}
           <ScrollView contentContainerStyle={styles.cardContainer}>
@@ -114,23 +107,5 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     alignItems: 'center',
-  },
-  bannerContainer: {
-    alignItems: 'center',
-    marginTop: height / 4,
-    justifyContent: 'center',
-  },
-  banner: {
-    alignItems: 'center',
-    // padding: 10,
-    // backgroundColor: COLORS.WHITE,
-    width: width * 0.7,
-    justifyContent: 'center',
-    // borderRadius: 20,
-    marginTop: 20,
-  },
-  bannerText: {
-    fontSize: 30,
-    color: COLORS.WHITE,
   },
 });
