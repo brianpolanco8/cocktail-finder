@@ -1,6 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import {
+  TextInput,
+  TouchableOpacity,
+  RectButton,
+} from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {COLORS} from '../styles';
@@ -17,8 +21,9 @@ const Input = ({
   iconSize,
   placeholder,
   value,
+  editable,
+  button,
 }) => {
-  console.log('style', style);
   return (
     <View style={[styles.searchSection, style]}>
       <Icon
@@ -27,6 +32,7 @@ const Input = ({
         size={iconSize ? iconSize : 30}
         color="#000"
       />
+
       <TextInput
         autoFocus={autoFocus}
         style={[styles.input, placeholder ? {textAlign: 'center'} : null]}
@@ -37,6 +43,7 @@ const Input = ({
         navigation={navigation}
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
+        editable={editable}
       />
     </View>
   );
@@ -52,6 +59,8 @@ Input.propTypes = {
   iconSize: PropTypes.number,
   placeholder: PropTypes.string,
   value: PropTypes.string,
+  editable: PropTypes.bool,
+  button: PropTypes.bool,
 };
 
 export default Input;
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
   searchSection: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: COLORS.WHITE,
     width: width * 0.9,
     borderRadius: 30,
@@ -78,8 +87,8 @@ const styles = StyleSheet.create({
     // paddingLeft: 0,
     // backgroundColor: '#fff',
     color: '#424242',
+    alignItems: 'center',
 
     fontSize: 18,
-    fontWeight: 'bold',
   },
 });
