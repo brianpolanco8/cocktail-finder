@@ -22,7 +22,7 @@ To start development server depending on the OS you'll want the app to run, exec
 # List of libraries used
 
 * **react-native-navigation**: to move between screens.
-* **react-native-linear-gradient**: for a nice background color .
+* **react-native-linear-gradient**: for a nice background color.
 * **axios**: as a http client for fetching APIs.
 * **prop-types**: as a typing library.
 * **redux**: as a state container.
@@ -31,4 +31,4 @@ To start development server depending on the OS you'll want the app to run, exec
 
 # How can the list be more performant ?
 
-For the list to be more performant I'll fetch the drinks by chunks, each chunk with a maximum quantity of drinks, doing it this has the advantage of limiting the amount of data the users receives which results in a faster server response to the client because the server doesn't has to send all the information back to the user. So, each time the user scrolls down and reaches the bottom of the app list, this will trigger another fetch that will bring the other chunk of data.
+To get a better performance I would fetch the drinks by chunks, making each one have a maximum quantity of drinks. In this way, I would limit the amount of data the users receive thus getting server responses faster to the client. That’s because the server doesn't have to send all the information back to the user. Therefore, each time the user scrolls down and reaches the bottom of the app list, another fetch would be triggered that will bring the other chunk of data making the user feel more comfortable with the responsiveness of the application.
