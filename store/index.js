@@ -1,36 +1,9 @@
-import AsyncStorage from '@react-native-community/async-storage';
-
-import {createStore, compose, applyMiddleware, Store} from 'redux';
+import {createStore, compose, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {persistStore, persistReducer} from 'redux-persist';
 
 // Import the root reducer
 
 import rootReducer from './reducers';
-
-// Middleware: Redux Persist Config
-
-const persistConfig = {
-  // Root?
-
-  key: 'root',
-
-  // Storage Method (React Native)
-
-  storage: AsyncStorage,
-
-  // Whitelist (Save Specific Reducers)
-
-  // whitelist: [''],
-
-  // Blacklist (Don't Save Specific Reducers)
-
-  // blacklist: [],
-};
-
-// Middleware: Redux Persist Persisted Reducer
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Setup Thunk Middleware
 
@@ -47,7 +20,7 @@ const enchancers = compose(thunk);
 
 // Create and export the store
 
-const store = createStore(persistedReducer, enchancers);
+const store = createStore(rootReducer, enchancers);
 // const store = createStore(
 //   persistedReducer,
 //   composeEnhancers(applyMiddleware(thunkMiddleware)),
@@ -55,6 +28,4 @@ const store = createStore(persistedReducer, enchancers);
 
 // Middleware: Redux Persist Persister
 
-let persistor = persistStore(store);
-
-export {store, persistor};
+export {store};

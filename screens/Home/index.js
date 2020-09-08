@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {COLORS} from '../../styles';
+import Input from '../../components/Input';
 
 const {width} = Dimensions.get('window');
 
@@ -31,15 +32,11 @@ const Home = ({navigation}) => {
         </View>
 
         {/* BUTTON */}
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Search')}>
-          <View style={styles.buttonText}>
-            <Icon style={styles.icon} name="search" size={30} />
-            <Text style={styles.icon}>Search your favorite cocktail</Text>
-          </View>
-        </TouchableOpacity>
+        <Input
+          placeholderTextColor={'black'}
+          onFocus={() => navigation.navigate('Search')}
+          placeholder="Search your favorite cocktail"
+        />
       </LinearGradient>
     </View>
   );
@@ -67,6 +64,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flexDirection: 'row',
+    marginBottom: 10,
   },
   text: {
     fontSize: 24,

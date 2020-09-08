@@ -6,7 +6,7 @@ const initialState = {
   isLoading: false,
 };
 
-const session = (state = initialState, action) => {
+const search = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.SEARCH_REQUEST:
       return {
@@ -46,4 +46,4 @@ const session = (state = initialState, action) => {
   }
 };
 
-export default session;
+export default search;

@@ -4,6 +4,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {COLORS} from '../styles';
+import Input from './Input';
 
 const {width} = Dimensions.get('window');
 
@@ -19,16 +20,23 @@ const SearchHeader = ({
         <Icon
           style={styles.icon}
           name="angle-left"
-          size={30}
+          size={40}
           color={COLORS.WHITE}
         />
       </TouchableOpacity>
-      <TextInput
+      <Input
         autoFocus
         style={styles.input}
         value={searchKeyword}
         onChangeText={(text) => setSearchKeyword(text)}
+        iconSize={20}
       />
+      {/* <TextInput
+        autoFocus
+        style={styles.input}
+        value={searchKeyword}
+        onChangeText={(text) => setSearchKeyword(text)}
+      /> */}
       <TouchableOpacity onPress={() => clearSearch()}>
         <Text style={styles.cancelText}>Cancel</Text>
       </TouchableOpacity>
@@ -59,7 +67,6 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 20,
     backgroundColor: COLORS.WHITE,
-    padding: 10,
     width: width * 0.7,
     borderRadius: 20,
   },
