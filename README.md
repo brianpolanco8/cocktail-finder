@@ -28,3 +28,7 @@ To start development server depending on the OS you'll want the app to run, exec
 * **redux**: as a state container
 * **redux-thunk**: as a way to dispatch asynchronous actions
 
+
+# How can the list be more performant ?
+
+For the list to be more performant I'll fetch the drinks by chunks, each chunk with a maximun quantity of drinks, doing it this way we have the adventage of limiting the amount of data the users receives which results in a faster server response to the client because the server doesn't has to send all the information back to the user. So each time the user scrolls down and reaches the bottom of the app list, this will trigger another fetch that will bring the other chunk of data.
