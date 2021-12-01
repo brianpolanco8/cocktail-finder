@@ -1,8 +1,8 @@
-# FoxBox CockTail Finder Challenge
+# CockTail Finder
 
 CocktailFinder
 
-This a react-native simple application in order to test my skills for foxbox interview proccess.
+This a react-native simple application in order to test my skills.
 
 
 # Installation and Setup Instructions
